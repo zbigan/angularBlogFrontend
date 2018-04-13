@@ -20,7 +20,7 @@ export class UserService {
   ) { }
 
   saveNewUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8001/users', user, httpOptions).pipe(
+    return this.http.post<User>('https://blooming-dawn-30284.herokuapp.com/users', user, httpOptions).pipe(
       catchError(this.handleError<any>('newUser'))
     );
   }

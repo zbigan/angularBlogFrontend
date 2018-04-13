@@ -10,8 +10,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class AuthService {
 
   loggedIn: BehaviorSubject<boolean>;
-  // apiUrl: 'http://localhost:5000';
-
 
   getToken(): string {
     return window.localStorage['jwtToken'];
@@ -39,7 +37,7 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    this.http.post('http://localhost:8001/login', {
+    this.http.post('https://blooming-dawn-30284.herokuapp.com/login', {
       email: email,
       password: password
     }).subscribe((resp: any) => {
