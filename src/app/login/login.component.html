@@ -1,4 +1,6 @@
 <div *ngIf="!loggedIn" class="logged-out">
+    <div> email: new@gmail.com </div> 
+    <div> password: newnew </div> 
     <input type="text" placeholder="Email" [(ngModel)]="email"><br><br>
     <input type="password" placeholder="Password" [(ngModel)]="password"><br><br>
     <a routerLink="/" (click)="doLogin()">Login</a>
