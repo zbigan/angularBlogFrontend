@@ -1,9 +1,19 @@
-<div *ngIf="!loggedIn" class="logged-out">
+<div class="container">
+    <div class="h1 mb-4 mt-4 text-center">Log In</div>
     <div> email: new@gmail.com </div> 
     <div> password: newnew </div> 
-    <input type="text" placeholder="Email" [(ngModel)]="email"><br><br>
-    <input type="password" placeholder="Password" [(ngModel)]="password"><br><br>
-    <a routerLink="/" (click)="doLogin()">Login</a>
+
+    <div *ngIf="!loggedIn" class="logged-out">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input [(ngModel)]="email" type="text" class="form-control" id="email" placeholder="Email">
+        </div>  
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input [(ngModel)]="password" type="text" class="form-control" id="password" placeholder="Password">
+        </div>  
+        <a class="btn btn-primary" routerLink="/" (click)="doLogin()">Login</a>
+    </div>
 </div>
 <!-- <div *ngIf="loggedIn" class="logged-in">
     You are logged in.
