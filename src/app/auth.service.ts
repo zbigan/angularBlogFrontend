@@ -2,9 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-// import { Observable } from 'rxjs/Observable';
-
-// import { environment } from '../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +34,7 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    this.http.post('https://blooming-dawn-30284.herokuapp.com/login', {
+    this.http.post('http://blooming-dawn-30284.herokuapp.com/login', {
       email: email,
       password: password
     }).subscribe((resp: any) => {
