@@ -11,13 +11,13 @@ import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
-  { path: 'blogs', component: BlogsComponent },
-  { path: '', redirectTo: '/blogs', pathMatch: 'full' },
-  { path: 'detail/:id', component: BlogDetailComponent},
-  { path: 'detail/:id/edit', component: BlogEditComponent},
-  { path: 'blogs/new', component: BlogNewComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: '/blogs', component: BlogsComponent },
+  { path: '/', redirectTo: '/blogs', pathMatch: 'full' },
+  { path: '/detail/:id', component: BlogDetailComponent},
+  { path: '/detail/:id/edit', component: BlogEditComponent},
+  { path: '/blogs/new', component: BlogNewComponent},
+  { path: '/login', component: LoginComponent},
+  { path: '/register', component: RegisterComponent}
 
 
 
