@@ -2,7 +2,7 @@
     <div class="h1 mb-4 mt-4 text-center">Log In</div>
     <div> email: new@gmail.com </div> 
     <div> password: newnew </div> 
-
+    <br><br>
     <div *ngIf="!loggedIn" class="logged-out">
         <div class="form-group">
             <label for="email">Email</label>
@@ -12,13 +12,13 @@
             <label for="password">Password</label>
             <input [(ngModel)]="password" type="text" class="form-control" id="password" placeholder="Password">
         </div>  
-        <a class="btn btn-primary" routerLink="/" (click)="doLogin()">Login</a>
+        <a class="btn btn-primary" (click)="doLogin()">Login</a>
     </div>
 </div>
-<!-- <div *ngIf="loggedIn" class="logged-in">
+<div *ngIf="loggedIn" class="logged-in">
     You are logged in.
 
     <button (click)="doLogout()">Log Out</button>
 
-</div> -->
+</div> 
   
