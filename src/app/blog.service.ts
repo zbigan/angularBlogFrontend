@@ -16,7 +16,7 @@ const httpOptions = {
 export class BlogService {
   
   getBlogs(): Observable<Blog[]> {
-    return this.http.get<Blog[]>('http://blooming-dawn-30284.herokuapp.com/blogs')
+    return this.http.get<Blog[]>('https://blooming-dawn-30284.herokuapp.com/blogs')
       .pipe(
         // tap(blogs => this.log(`fetched blogs`)),
         catchError(this.handleError('getBlogs', []))
@@ -25,7 +25,7 @@ export class BlogService {
 
   getBlog(id: string): Observable<Blog> {
     
-    return this.http.get<Blog>(`http://blooming-dawn-30284.herokuapp.com/detail/${id}`, {
+    return this.http.get<Blog>(`https://blooming-dawn-30284.herokuapp.com/detail/${id}`, {
       headers: this.authService.buildHeaders()
     }).pipe(
       catchError(this.handleError<Blog>(`getBlog id=${id}`))
@@ -36,7 +36,7 @@ export class BlogService {
   updateBlog(blog: Blog): Observable<any> {
     // const id = this.route.snapshot.paramMap.get('id');
     console.log("id="+blog.id);
-    return this.http.put(`http://blooming-dawn-30284.herokuapp.com/detail/${blog.id}`, blog, httpOptions).pipe(
+    return this.http.put(`https://blooming-dawn-30284.herokuapp.com/detail/${blog.id}`, blog, httpOptions).pipe(
       catchError(this.handleError<any>(`updateBlog id=${blog.id}`))
     );
 
@@ -47,13 +47,13 @@ export class BlogService {
   }
 
   saveNewBlog(blog: Blog): Observable<Blog> {
-    return this.http.post<Blog>('http://blooming-dawn-30284.herokuapp.com/blogs', blog, httpOptions).pipe(
+    return this.http.post<Blog>('https://blooming-dawn-30284.herokuapp.com/blogs', blog, httpOptions).pipe(
       catchError(this.handleError<any>('newBlog'))
     );
   }
 
   deleteBlog(id: string): Observable<Blog> {
-    return this.http.delete<Blog>(`http://blooming-dawn-30284.herokuapp.com/detail/${id}`, httpOptions).pipe(
+    return this.http.delete<Blog>(`https://blooming-dawn-30284.herokuapp.com/detail/${id}`, httpOptions).pipe(
       catchError(this.handleError<Blog>('deleteBlog'))
     )
   }
