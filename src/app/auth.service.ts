@@ -34,7 +34,7 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    this.http.post('https://blooming-dawn-30284.herokuapp.com/login', {
+    this.http.post('http://localhost:8001/login', {
       email: email,
       password: password
     }).subscribe((resp: any) => {
