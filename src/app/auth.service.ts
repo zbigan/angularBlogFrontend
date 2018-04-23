@@ -8,6 +8,14 @@ export class AuthService {
 
   loggedIn: BehaviorSubject<boolean>;
 
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) {
+    const jwtToken = this.getToken();
+    this.loggedIn = new BehaviorSubject<boolean>(jwtToken ? true : false);
+  }
+
   getToken(): string {
     return window.localStorage['jwtToken'];
   }
@@ -54,12 +62,6 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
-  constructor(
-    private http: HttpClient,
-    private toastr: ToastrService
-  ) {
-    const jwtToken = this.getToken();
-    this.loggedIn = new BehaviorSubject<boolean>(jwtToken ? true : false);
-  }
+  
 
 }

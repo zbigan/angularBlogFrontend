@@ -1,22 +1,24 @@
-<div *ngIf="blog" class="container">
-        <div class="h1 mb-4 mt-4 text-center">Edit {{blog.title}}</div>
-  
-    <form>
-        <div class="form-group">
-            <label for="InputTitle">Blog Title</label>
-            <input [(ngModel)]="blog.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="InputTitle" placeholder="Title">
-        </div>
-        <div class="form-group">
-            <label for="InputImage">Image URL</label>
-            <input [(ngModel)]="blog.image" [ngModelOptions]="{standalone: true}" type="url" class="form-control" id="InputImage" placeholder="Enter image URL">
-        </div>
-        <div class="form-group">
-            <label for="InputBody">Blog Body</label>
-            <textarea [(ngModel)]="blog.body" [ngModelOptions]="{standalone: true}" class="form-control" id="InputBody" rows="3"></textarea>
-        </div>
-        <button (click)="update(blog.title, blog.image, blog.body)" type="submit" class="btn btn-primary">Submit</button>
-        <button (click)="goBack()">Go back</button>
+<div *ngIf="checkToken()">
+    <div *ngIf="blog" class="container">
+            <div class="h1 mb-4 mt-4 text-center">Edit {{blog.title}}</div>
+    
+        <form>
+            <div class="form-group">
+                <label for="InputTitle">Blog Title</label>
+                <input [(ngModel)]="blog.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="InputTitle" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="InputImage">Image URL</label>
+                <input [(ngModel)]="blog.image" [ngModelOptions]="{standalone: true}" type="url" class="form-control" id="InputImage" placeholder="Enter image URL">
+            </div>
+            <div class="form-group">
+                <label for="InputBody">Blog Body</label>
+                <textarea [(ngModel)]="blog.body" [ngModelOptions]="{standalone: true}" class="form-control" id="InputBody" rows="3"></textarea>
+            </div>
+            <button (click)="update(blog.title, blog.image, blog.body)" type="submit" class="btn btn-primary">Submit</button>
+            <button (click)="goBack()">Go back</button>
 
-    </form>
+        </form>
 
+    </div>
 </div>

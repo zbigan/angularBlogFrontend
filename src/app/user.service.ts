@@ -4,23 +4,21 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { AuthService } from './auth.service';
 
 
 @Injectable()
 export class UserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   saveNewUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8001/users', user, httpOptions).pipe(
+    return this.http.post<User>('http://localhost:8001/users', user, {
+      headers: this.authService.buildHeaders()
+    }).pipe(
       catchError(this.handleError<any>('newUser'))
     );
   }

@@ -1,26 +1,27 @@
-<div *ngIf="blog" class="container">
-    <div class="card mt-4">
-        <div class="card-body text-center">
-            
-            <div class="card-title mb-4"><h1>{{ blog.title }}</h1></div>
-            <div class="card-img-top">
-                <img src = "{{ blog.image }}">
-            </div>
-            <!-- <span><%= blog.created.toDateString() %></span> -->
+<div *ngIf="checkToken()">
+    <div *ngIf="blog" class="container">
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                
+                <div class="card-title mb-4"><h1>{{ blog.title }}</h1></div>
+                <div class="card-img-top">
+                    <img src = "{{ blog.image }}">
+                </div>
+                <!-- <span><%= blog.created.toDateString() %></span> -->
 
-            <div class="card-text mt-4 mb-4">
-                {{ blog.body }}
+                <div class="card-text mt-4 mb-4">
+                    {{ blog.body }}
 
+                </div>
+                
+                <a class="btn btn-light" (click)="goBack()">Go back</a>
+                <a class="btn btn-light" routerLink="/detail/{{ blog._id }}/edit" >Edit</a>
+                <a class="btn btn-light" (click)="delete(blog._id)">Delete blog</a>
+                
             </div>
-               
-            <a class="btn btn-light" (click)="goBack()">Go back</a>
-            <a class="btn btn-light" routerLink="/detail/{{ blog._id }}/edit" >Edit</a>
-            <a class="btn btn-light" (click)="delete(blog._id)">Delete blog</a>
-            
         </div>
+        
     </div>
-    
+
 </div>
-
-
      

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Blog } from '../blog';
 import { BlogService } from '../blog.service';
+import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -10,27 +12,23 @@ import { Location } from '@angular/common';
   templateUrl: './blog-new.component.html',
   styleUrls: ['./blog-new.component.css']
 })
-export class BlogNewComponent implements OnInit {
-  @Input() blog: Blog;
+export class BlogNewComponent {
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
+    private authService: AuthService,
     private location: Location
   ) { }
 
-  ngOnInit(): void {
-    this.getBlog();
+  checkToken() {
+    if(this.authService.getToken()){
+      return "yes";
+    } else{
+      this.router.navigate(["blogs"]);
+    }
   }
-
-  getBlog(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.blogService.getBlog(id)
-       .subscribe(blog => this.blog = blog
-    )
-  }
-
 
   goBack(): void {
     this.location.back();
@@ -41,8 +39,6 @@ export class BlogNewComponent implements OnInit {
 
     this.blogService.saveNewBlog({title, image, id, body} as Blog)
        .subscribe(() => this.goBack());
-      //  .subscribe();
-
   }
 
   

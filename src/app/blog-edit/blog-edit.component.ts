@@ -3,6 +3,8 @@ import { Blog } from '../blog';
 import { BlogService } from '../blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from "@angular/router";
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -16,7 +18,9 @@ export class BlogEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private location: Location
+    private location: Location,
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,5 +44,13 @@ export class BlogEditComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogService.updateBlog({title, image, id, body} as Blog)
       .subscribe(() => this.goBack());
+  }
+
+  checkToken() {
+    if(this.authService.getToken()){
+      return "yes";
+    } else{
+      this.router.navigate(["blogs"]);
+    }
   }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Blog } from '../blog';
 import { BlogService } from '../blog.service';
+import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -14,8 +16,10 @@ export class BlogDetailComponent implements OnInit {
   @Input() blog: Blog;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
+    private authService: AuthService,
     private location: Location
   ) { }
 
@@ -40,5 +44,12 @@ export class BlogDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
+  
+  checkToken() {
+    if(this.authService.getToken()){
+      return "yes";
+    } else{
+      this.router.navigate(["blogs"]);
+    }
+  }
 }
