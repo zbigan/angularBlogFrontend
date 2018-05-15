@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
 import { User } from '../user';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 
@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   constructor(
     private location: Location,
@@ -21,8 +21,6 @@ export class RegisterComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-  }
 
   goBack(): void {
     this.location.back();
@@ -35,9 +33,9 @@ export class RegisterComponent implements OnInit {
 
   checkToken() {
     if(!this.authService.getToken()){
-      return "yes";
+      return 'yes';
     } else{
-      this.router.navigate(["blogs"]);
+      this.router.navigate(['blogs']);
     }
   }
 

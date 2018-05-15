@@ -4,7 +4,7 @@ import { BlogService } from '../blog.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -47,9 +47,9 @@ export class BlogDetailComponent implements OnInit {
   
   checkToken() {
     if(this.authService.getToken()){
-      return "yes";
+      return 'yes';
     } else{
-      this.router.navigate(["blogs"]);
+      this.router.navigate(['blogs']);
     }
   }
 }

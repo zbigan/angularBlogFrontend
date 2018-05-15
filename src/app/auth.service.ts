@@ -2,18 +2,53 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { HttpBase } from './http-base';
+import { environment } from '../environments/environment';
+
 
 @Injectable()
-export class AuthService {
+export class AuthService extends HttpBase {
 
   loggedIn: BehaviorSubject<boolean>;
 
   constructor(
-    private http: HttpClient,
+    public http: HttpClient,
     private toastr: ToastrService
   ) {
+    super(http);
     const jwtToken = this.getToken();
     this.loggedIn = new BehaviorSubject<boolean>(jwtToken ? true : false);
+  }
+
+  login(email: string, password: string) {
+    return this.httpPost({
+        email: email,
+        password: password
+      }, 
+      environment.baseUrl+'/login',
+      this.buildHeaders()
+    );
+      
+  }
+
+  loginCallback(resp) {
+    !resp  ? (
+      this.loggedIn.next(undefined),
+      this.toastr.error('Wrong email or password.')
+      
+    ) : (
+        this.loggedIn.next(true),
+        this.saveToken(resp.token),
+        this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
+      )
+  }
+
+  
+  logout() {
+    this.destroyToken();
+    this.loggedIn.next(false);
+    window.localStorage.removeItem('userName');
+    window.localStorage.removeItem('userEmail');
   }
 
   getToken(): string {
@@ -38,30 +73,7 @@ export class AuthService {
       headersConfig['Authorization'] = `Token ${this.getToken()}`;
     }
     return new HttpHeaders(headersConfig);
-  }
-
-
-  login(email: string, password: string) {
-    this.http.post('http://localhost:8001/login', {
-      email: email,
-      password: password
-    }).subscribe((resp: any) => {
-      this.loggedIn.next(true);
-      this.saveToken(resp.token);
-      // this.toastr.success(resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!');
-    // }
-      }, (errorResp) => {
-      this.loggedIn.next(undefined);
-      errorResp.error ? this.toastr.error(errorResp.error.errorMessage) : this.toastr.error('An unknown error has occured.');
-    });
-    // );
-  }
-
-  logout() {
-    this.destroyToken();
-    this.loggedIn.next(false);
-  }
-
+}
   
 
 }

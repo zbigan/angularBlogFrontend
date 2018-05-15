@@ -21,11 +21,6 @@ import { RegisterComponent } from './register/register.component';
 import { UserService } from './user.service';
 
 
-// import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
-//
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,14 +40,11 @@ import { UserService } from './user.service';
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
-
-
-    // BsDropdownModule
   ],
   providers: [
     BlogService,
     AuthService,
-    UserService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

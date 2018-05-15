@@ -1,75 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Blog } from './blog';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpBase } from './http-base';
 import { AuthService } from './auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { environment } from '../environments/environment';
 
 
 @Injectable()
-export class BlogService {
+export class BlogService extends HttpBase {
   constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private authService: AuthService
-
-  ) { }
+    public http: HttpClient,
+    private authservice: AuthService
+  ) {
+    super(http);  
+   }
   
-  getBlogs(): Observable<Blog[]> {
-    return this.http.get<Blog[]>('http://localhost:8001/blogs', {
-      headers: this.authService.buildHeaders()
-    })
-      .pipe(
-        // tap(blogs => this.log(`fetched blogs`)),
-        catchError(this.handleError('getBlogs', []))
-      );
+  getBlogs() {
+    return this.httpGet(environment.baseUrl+'/blogs', this.authservice.buildHeaders());
   }
 
-  getBlog(id: string): Observable<Blog> {
+  getBlog(id: string) {
     
-    return this.http.get<Blog>(`http://localhost:8001/detail/${id}`, {
-      headers: this.authService.buildHeaders()
-    }).pipe(
-      catchError(this.handleError<Blog>(`getBlog id=${id}`))
-    );  
+    return this.httpGet(environment.baseUrl+`/blogs/${id}`, this.authservice.buildHeaders());
   }
 
-
-  updateBlog(blog: Blog): Observable<any> {
-    // const id = this.route.snapshot.paramMap.get('id');
-    console.log("id="+blog.id);
-    return this.http.put(`http://localhost:8001/detail/${blog.id}`, blog, {
-      headers: this.authService.buildHeaders()
-    }).pipe(
-      catchError(this.handleError<any>(`updateBlog id=${blog.id}`))
-    );
+  updateBlog(blog: Blog, id:string) {
+    return this.httpPut(blog, environment.baseUrl+`/blogs/${id}`, this.authservice.buildHeaders());
   }
 
-  saveNewBlog(blog: Blog): Observable<Blog> {
-    return this.http.post<Blog>('http://localhost:8001/blogs', blog, {
-      headers: this.authService.buildHeaders()
-    }).pipe(
-      catchError(this.handleError<any>('newBlog'))
-    );
+  saveNewBlog(blog: Blog) {
+    return this.httpPost(blog, environment.baseUrl+'/blogs', this.authservice.buildHeaders());
   }
 
-  deleteBlog(id: string): Observable<Blog> {
-    return this.http.delete<Blog>(`http://localhost:8001/detail/${id}`, {
-      headers: this.authService.buildHeaders()
-    }).pipe(
-      catchError(this.handleError<Blog>('deleteBlog'))
-    )
-  }
-
-  
-
-  private handleError<T> (operation = 'operation', result?: T){
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    }
+  deleteBlog(id: string) {
+    return this.httpDelete(environment.baseUrl+`/blogs/${id}`, this.authservice.buildHeaders());
   }
 
 }

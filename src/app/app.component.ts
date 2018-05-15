@@ -14,10 +14,6 @@ export class AppComponent {
                 
   }
 
-  // authen(): void {
-  //   this.blogService.createNewBlog()
-  // }
-
   checkIfLoggedIn(): string {
     return this.authService.getToken()
   }

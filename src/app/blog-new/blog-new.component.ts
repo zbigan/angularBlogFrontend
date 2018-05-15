@@ -4,7 +4,7 @@ import { BlogService } from '../blog.service';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,9 +24,9 @@ export class BlogNewComponent {
 
   checkToken() {
     if(this.authService.getToken()){
-      return "yes";
+      return 'yes';
     } else{
-      this.router.navigate(["blogs"]);
+      this.router.navigate(['blogs']);
     }
   }
 
@@ -35,9 +35,7 @@ export class BlogNewComponent {
   }
 
   create(title: string, image: string, body: string): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.blogService.saveNewBlog({title, image, id, body} as Blog)
+    this.blogService.saveNewBlog({title, image, body} as Blog)
        .subscribe(() => this.goBack());
   }
 
