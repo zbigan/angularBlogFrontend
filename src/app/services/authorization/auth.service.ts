@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { HttpBase } from './http-base';
-import { environment } from '../environments/environment';
+import { HttpBase } from '../../http-base';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()

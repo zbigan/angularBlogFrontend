@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BlogsComponent } from './blogs/blogs.component';
-import { BlogService } from './blog.service';
+import { BlogService } from './services/blog/blog.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -14,11 +14,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { BlogNewComponent } from './blog-new/blog-new.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/authorization/auth.service';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
-import { UserService } from './user.service';
+import { UserService } from './services/user/user.service';
 
 
 @NgModule({

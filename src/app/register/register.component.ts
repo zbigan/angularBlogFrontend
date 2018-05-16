@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user/user.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/authorization/auth.service';
 
 
 @Component({

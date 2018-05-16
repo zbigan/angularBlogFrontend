@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Blog } from './blog';
+import { Blog } from '../../blog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { HttpBase } from './http-base';
-import { AuthService } from './auth.service';
-import { environment } from '../environments/environment';
+import { HttpBase } from '../../http-base';
+import { AuthService } from '../authorization/auth.service';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()

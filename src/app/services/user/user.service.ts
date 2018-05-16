@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
+import { User } from '../../user';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { HttpBase } from './http-base';
-import { AuthService } from './auth.service';
-import { environment } from '../environments/environment';
+import { HttpBase } from '../../http-base';
+import { AuthService } from '../authorization/auth.service';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable()
