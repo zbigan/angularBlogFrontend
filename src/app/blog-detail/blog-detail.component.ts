@@ -38,12 +38,11 @@ export class BlogDetailComponent implements OnInit {
   delete(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogService.deleteBlog(id)
-      .subscribe(() => this.goBack());
+      .subscribe(() => this.goToBlogs());
   }
 
-  goBack(): void {
-    this.location.back();
-  }
+  goToBlogs(): void {
+    this.router.navigate(['blogs']);  }
   
   checkToken() {
     if(this.authService.getToken()){

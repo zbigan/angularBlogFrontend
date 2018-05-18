@@ -16,7 +16,7 @@
                 <textarea [(ngModel)]='blog.body' [ngModelOptions]='{standalone: true}' class='form-control' id='InputBody' rows='3'></textarea>
             </div>
             <button (click)='update(blog.title, blog.image, blog.body)' type='submit' class='btn btn-primary'>Submit</button>
-            <button (click)='goBack()'>Go back</button>
+            <button (click)='goToBlog()'>Go to blog</button>
 
         </form>
 

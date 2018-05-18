@@ -30,13 +30,13 @@ export class BlogNewComponent {
     }
   }
 
-  goBack(): void {
-    this.location.back();
+  goToBlogs(): void {
+    this.router.navigate(['blogs']);  
   }
 
   create(title: string, image: string, body: string): void {
     this.blogService.saveNewBlog({title, image, body} as Blog)
-       .subscribe(() => this.goBack());
+       .subscribe(() => this.goToBlogs());
   }
 
   

@@ -22,13 +22,13 @@ export class RegisterComponent {
   ) { }
 
 
-  goBack(): void {
-    this.location.back();
+  goToLogin(): void {
+    this.router.navigate(['login']);      
   }
 
   createUser(name: string, email: string, password: string): void {
     this.userService.saveNewUser({name, email, password} as User)
-       .subscribe(() => this.goBack());
+       .subscribe(() => this.goToLogin());
   }
 
   checkToken() {

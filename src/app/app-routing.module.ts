@@ -18,9 +18,6 @@ const routes: Routes = [
   { path: 'blogs/:id/edit', component: BlogEditComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent}
-
-
-
 ];
 
 @NgModule({

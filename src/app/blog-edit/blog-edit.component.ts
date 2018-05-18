@@ -36,14 +36,15 @@ export class BlogEditComponent implements OnInit {
   }
 
 
-  goBack(): void {
-    this.location.back();
+  goToBlog(): void {
+    const id = this.route.snapshot.paramMap.get('id');    
+    this.router.navigate([`blogs/${id}`]);  
   }
 
   update(title: string, image: string, body: string): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.blogService.updateBlog({title, image, body} as Blog, id)
-      .subscribe(() => this.goBack());
+      .subscribe(() => this.goToBlog());
   }
 
   checkToken() {
