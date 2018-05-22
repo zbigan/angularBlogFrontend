@@ -31,12 +31,8 @@ export class RegisterComponent {
        .subscribe(() => this.goToLogin());
   }
 
-  checkToken() {
-    if(!this.authService.getToken()){
-      return 'yes';
-    } else{
-      this.router.navigate(['blogs']);
-    }
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 
 }

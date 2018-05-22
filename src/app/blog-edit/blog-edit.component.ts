@@ -47,11 +47,7 @@ export class BlogEditComponent implements OnInit {
       .subscribe(() => this.goToBlog());
   }
 
-  checkToken() {
-    if(this.authService.getToken()){
-      return 'yes';
-    } else{
-      this.router.navigate(['blogs']);
-    }
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 }

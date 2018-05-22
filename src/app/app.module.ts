@@ -5,7 +5,7 @@ import { BlogsComponent } from './blogs/blogs.component';
 import { BlogService } from './services/blog/blog.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 
@@ -19,6 +19,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user/user.service';
+import { RouterModule, Router } from '@angular/router';
 
 
 @NgModule({

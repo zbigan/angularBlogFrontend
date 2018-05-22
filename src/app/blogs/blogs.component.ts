@@ -26,8 +26,8 @@ export class BlogsComponent implements OnInit {
       .subscribe(blogs => this.blogs = blogs);
   }
   
-  checkLoggedIn(): string {
-    return this.authService.getToken()
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 
 }

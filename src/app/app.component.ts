@@ -12,8 +12,8 @@ export class AppComponent {
                 
   }
 
-  checkIfLoggedIn(): string {
-    return this.authService.getToken()
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 
   logOut(): void {

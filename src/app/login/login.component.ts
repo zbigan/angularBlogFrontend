@@ -37,8 +37,8 @@ export class LoginComponent {
     this.authService.logout();
   }
 
-  checkLoggedIn(): string {
-    return this.authService.getToken();
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 
 }

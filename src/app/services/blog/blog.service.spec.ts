@@ -1,11 +1,18 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { BlogService } from './blog.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { AuthService } from '../authorization/auth.service';
 
 describe('BlogService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BlogService]
+      providers: [
+        BlogService,
+        HttpClient,
+        HttpHandler,
+        AuthService
+      ]
     });
   });
 

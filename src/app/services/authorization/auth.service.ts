@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ToastrService} from 'ngx-toastr';
+// import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { HttpBase } from '../../http-base';
 import { environment } from '../../../environments/environment';
@@ -13,7 +13,7 @@ export class AuthService extends HttpBase {
 
   constructor(
     public http: HttpClient,
-    private toastr: ToastrService
+    // private toastr: ToastrService
   ) {
     super(http);
     const jwtToken = this.getToken();
@@ -33,13 +33,13 @@ export class AuthService extends HttpBase {
 
   loginCallback(resp) {
     !resp  ? (
-      this.loggedIn.next(undefined),
-      this.toastr.error('Wrong email or password.')
+      this.loggedIn.next(undefined)
+      // this.toastr.error('Wrong email or password.')
       
     ) : (
         this.loggedIn.next(true),
-        this.saveToken(resp.token),
-        this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
+        this.saveToken(resp.token)
+        // this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
       )
   }
 

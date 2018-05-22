@@ -22,12 +22,8 @@ export class BlogNewComponent {
     private location: Location
   ) { }
 
-  checkToken() {
-    if(this.authService.getToken()){
-      return 'yes';
-    } else{
-      this.router.navigate(['blogs']);
-    }
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 
   goToBlogs(): void {

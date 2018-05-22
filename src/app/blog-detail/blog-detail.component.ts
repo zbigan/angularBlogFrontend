@@ -3,7 +3,6 @@ import { Blog } from '../blog';
 import { BlogService } from '../services/blog/blog.service';
 import { AuthService } from '../services/authorization/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 
@@ -19,8 +18,7 @@ export class BlogDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private authService: AuthService,
-    private location: Location
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -44,11 +42,7 @@ export class BlogDetailComponent implements OnInit {
   goToBlogs(): void {
     this.router.navigate(['blogs']);  }
   
-  checkToken() {
-    if(this.authService.getToken()){
-      return 'yes';
-    } else{
-      this.router.navigate(['blogs']);
-    }
+  checkIfLoggedIn(): boolean {
+    return !!this.authService.getToken();
   }
 }
