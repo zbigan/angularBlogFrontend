@@ -55,6 +55,12 @@ export class AuthService extends HttpBase {
     return window.localStorage['jwtToken'];
   }
 
+  isAuthenticated(): Promise<boolean> {
+    return Promise.resolve(!!localStorage.getItem('jwtToken'));
+  }
+
+
+
   saveToken(token: string) {
     window.localStorage['jwtToken'] = token;
   }

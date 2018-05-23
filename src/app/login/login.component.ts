@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/authorization/auth.service';
-import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -9,25 +8,18 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email;
-  password;
-  loggedIn;
+  // loggedIn;
 
   constructor(  
     private authService: AuthService,
-    private toastr: ToastrService 
   ) { 
-    this.authService.loggedIn
-      .subscribe(
-        (loggedIn) => {
-          this.loggedIn = loggedIn;
-        }
-      );
+    // this.authService.loggedIn
+    //   .subscribe(loggedIn => this.loggedIn = loggedIn);
 
     }
 
-  doLogin() {
-    this.authService.login(this.email, this.password)
+  doLogin(email, password) {
+    this.authService.login(email, password)
     .subscribe((resp) => {
       this.authService.loginCallback(resp);
     });

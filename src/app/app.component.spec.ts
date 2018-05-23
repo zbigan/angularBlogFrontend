@@ -46,6 +46,61 @@ describe('Test what is being shown in navbar when logged in and logged out', ()=
     expect(app).toBeTruthy();
   });
 
+  //async
+  xit('should show Login button if not logged in and vice versa (ASYNC)', async()=>{
+    fixture.detectChanges();
+    expect(logInOutElement.nativeElement.textContent.trim()).toBe('Login');
+    console.log('needsloginBefore', component.needsLogin);
+    
+    // let spy = spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    // await component.ngOnInit();
+
+    // fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      console.log('needsloginAfter', component.needsLogin);
+      expect(logInOutElement.nativeElement.textContent.trim()).toBe('Logout');
+    // });
+
+    
+  });
+  //async
+  xit('should show Newblog button if not logged in and vice versa (ASYNC)', async()=>{
+    fixture.detectChanges();
+    expect(newblogElement.nativeElement.textContent.trim()).toBe('');
+    console.log('needsloginBefore', component.needsLogin);
+    
+    // let spy = spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    // await component.ngOnInit();
+
+    // fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      console.log('needsloginAfter', component.needsLogin);
+      expect(newblogElement.nativeElement.textContent.trim()).toBe('Newblog');
+    // });
+
+    
+  });
+
+  xit('should show Register button if not logged in and vice versa (ASYNC)', async()=>{
+    fixture.detectChanges();
+    expect(registerElement.nativeElement.textContent.trim()).toBe('Register');
+    console.log('needsloginBefore', component.needsLogin);
+    
+    // let spy = spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    spyOn(authService, 'isAuthenticated').and.returnValue(Promise.resolve(true));
+    // await component.ngOnInit();
+
+    // fixture.whenStable().then(()=>{
+      fixture.detectChanges();
+      console.log('needsloginAfter', component.needsLogin);
+      expect(registerElement.nativeElement.textContent.trim()).toBe('');
+    // });
+
+    
+  });
+
   it('should show Login button if not logged in and vice versa', ()=>{
     expect(logInOutElement.nativeElement.textContent.trim()).toBe('');
     fixture.detectChanges();

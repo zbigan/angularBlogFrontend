@@ -6,7 +6,7 @@ import { BlogService } from './services/blog/blog.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule } from '@angular/forms'; 
 
 
 //bootstrap
@@ -30,7 +30,7 @@ import { RouterModule, Router } from '@angular/router';
     BlogEditComponent,
     BlogNewComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
