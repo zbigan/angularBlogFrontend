@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8001'
+  baseUrl: 'https://blooming-dawn-30284.herokuapp.com'
 };
