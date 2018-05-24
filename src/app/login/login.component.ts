@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/authorization/auth.service';
 
 
@@ -12,8 +12,11 @@ export class LoginComponent {
     private authService: AuthService,
   ) { }
 
-  doLogin(email, password) {
-    this.authService.login(email, password)
+  email: string;
+  password: string;
+
+  doLogin() {
+    this.authService.login(this.email, this.password)
     .subscribe((resp) => {
       this.authService.loginCallback(resp);
     });

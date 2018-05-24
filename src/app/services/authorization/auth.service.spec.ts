@@ -2,6 +2,7 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { HttpClientModule, HttpClient, HttpRequest, HttpParams } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
+import { HttpBase } from '../../http-base';
 
 describe('AuthService', () => {
 
@@ -12,7 +13,8 @@ describe('AuthService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        AuthService
+        AuthService,
+        HttpBase
       ]
     });
   });

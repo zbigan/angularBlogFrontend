@@ -12,14 +12,14 @@ export class UserService {
   constructor(
     private httpBase: HttpBase,
     private router: Router,    
-    private toastr: ToastrService,    
+    // private toastr: ToastrService,    
   ) { }
 
   
   registerCallback(resp){
     !resp  ? (
-      this.toastr.error('Please provide correct data.')
-      
+      // this.toastr.error('Please provide correct data.')
+        console.log('Error', resp.error)
     ) : (
     this.router.navigate(['login'])
      )

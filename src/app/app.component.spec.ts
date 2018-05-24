@@ -6,6 +6,8 @@ import {HttpClient, HttpHandler} from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { LoginComponent } from './login/login.component';
 import { DebugElement } from '@angular/core';
+import { HttpBase } from './http-base';
+import { UserService } from './services/user/user.service';
 // import { ToastrService } from 'ngx-toastr';
 // import {ToastToken} from 'ngx-toastr/toastr/toast-token';
 
@@ -28,7 +30,7 @@ describe('Test what is being shown in navbar when logged in and logged out', ()=
       ],
       providers:[
         AuthService,
-        HttpClient,
+        HttpBase,
         HttpHandler
       ]
     }).compileComponents();
@@ -45,6 +47,38 @@ describe('Test what is being shown in navbar when logged in and logged out', ()=
     let app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  it('should show Login button if not logged in and vice versa', ()=>{
+    expect(logInOutElement.nativeElement.textContent.trim()).toBe('');
+    fixture.detectChanges();
+    expect(logInOutElement.nativeElement.textContent.trim()).toBe('Login');
+    spyOn(component, 'checkIfLoggedIn').and.returnValue(true);
+    fixture.detectChanges();
+    expect(logInOutElement.nativeElement.textContent.trim()).toBe('Logout');
+  });
+  
+  it('should show Newblog button if logged in and vice versa', ()=>{
+    expect(newblogElement.nativeElement.textContent.trim()).toBe('');
+    fixture.detectChanges();
+    expect(newblogElement.nativeElement.textContent.trim()).toBe('');
+    spyOn(component, 'checkIfLoggedIn').and.returnValue(true);
+    fixture.detectChanges();
+    expect(newblogElement.nativeElement.textContent.trim()).toBe('Newblog');        
+  });
+
+  it('should show Register button if logged out and vice versa', ()=>{
+    expect(registerElement.nativeElement.textContent.trim()).toBe('');
+    fixture.detectChanges();
+    expect(registerElement.nativeElement.textContent.trim()).toBe('Register');
+    spyOn(component, 'checkIfLoggedIn').and.returnValue(true);
+    fixture.detectChanges();
+    expect(registerElement.nativeElement.textContent.trim()).toBe('');        
+  });
+
+
+
+
+
 
   //async
   xit('should show Login button if not logged in and vice versa (ASYNC)', async()=>{
@@ -101,32 +135,7 @@ describe('Test what is being shown in navbar when logged in and logged out', ()=
     
   });
 
-  it('should show Login button if not logged in and vice versa', ()=>{
-    expect(logInOutElement.nativeElement.textContent.trim()).toBe('');
-    fixture.detectChanges();
-    expect(logInOutElement.nativeElement.textContent.trim()).toBe('Login');
-    spyOn(authService, 'getToken').and.returnValue('123');
-    fixture.detectChanges();
-    expect(logInOutElement.nativeElement.textContent.trim()).toBe('Logout');
-  });
   
-  it('should show Newblog button if logged in and vice versa', ()=>{
-    expect(newblogElement.nativeElement.textContent.trim()).toBe('');
-    fixture.detectChanges();
-    expect(newblogElement.nativeElement.textContent.trim()).toBe('');
-    spyOn(authService, 'getToken').and.returnValue('123');
-    fixture.detectChanges();
-    expect(newblogElement.nativeElement.textContent.trim()).toBe('Newblog');        
-  });
-
-  it('should show Register button if logged out and vice versa', ()=>{
-    expect(registerElement.nativeElement.textContent.trim()).toBe('');
-    fixture.detectChanges();
-    expect(registerElement.nativeElement.textContent.trim()).toBe('Register');
-    spyOn(authService, 'getToken').and.returnValue('123');
-    fixture.detectChanges();
-    expect(registerElement.nativeElement.textContent.trim()).toBe('');        
-  });
   
 });
 

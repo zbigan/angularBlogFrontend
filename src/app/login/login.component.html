@@ -3,19 +3,17 @@
     <div> email: new@gmail.com </div> 
     <div> password: newnew </div> 
     <br><br>
-    <span id='form'>
-        <div *ngIf='!checkIfLoggedIn()' class='logged-out'>
-            <div class='form-group'>
-                <label for='email'>Email</label>
-                <input #userEmail [(ngModel)]='email' type='email' class='form-control' id='email' placeholder='Email'>
-            </div>  
-            <div class='form-group'>
-                <label for='password'>Password</label>
-                <input #userPassword [(ngModel)]='password' type='password' class='form-control' id='password' placeholder='Password'>
-            </div>  
-            <a class='btn btn-primary' (click)='doLogin(userEmail.value, userPassword.value)'>Login</a>
-        </div>
-    </span>
+    <div *ngIf='!checkIfLoggedIn()' class='logged-out'>
+        <div class='form-group'>
+            <label for='email'>Email</label>
+            <input [(ngModel)]='email' type='email' class='form-control' id='email' placeholder='Email'>
+        </div>  
+        <div class='form-group'>
+            <label for='password'>Password</label>
+            <input [(ngModel)]='password' type='password' class='form-control' id='password' placeholder='Password'>
+        </div>  
+        <a class='btn btn-primary' (click)='doLogin()'>Login</a>
+    </div>
 </div>
 <div *ngIf='checkIfLoggedIn()' class='logged-in'>
     You are logged in.

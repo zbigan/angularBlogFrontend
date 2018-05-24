@@ -3,6 +3,7 @@ import { HttpClientModule, HttpClient, HttpRequest, HttpParams } from '@angular/
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BlogService } from './blog.service';
 import { AuthService } from '../authorization/auth.service';
+import { HttpBase } from '../../http-base';
 
 describe('BlogService', () => {
 
@@ -14,7 +15,8 @@ describe('BlogService', () => {
       ],
       providers: [
         BlogService,
-        AuthService
+        AuthService,
+        HttpBase
       ]
     });
   });

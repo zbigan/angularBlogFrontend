@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class AuthService {
   constructor(
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private httpBase: HttpBase
   ) { }
 
@@ -23,11 +23,11 @@ export class AuthService {
 
   loginCallback(resp) {
     !resp  ? (
-      this.toastr.error('Wrong email or password.')
-      
+      // this.toastr.error('Wrong email or password.')
+      console.log('Error', resp.error)        
     ) : (
-        this.saveToken(resp.token),
-        this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
+        this.saveToken(resp.token)
+        // this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
       )
   }
 
