@@ -8,15 +8,9 @@ import { AuthService } from '../services/authorization/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  // loggedIn;
-
   constructor(  
     private authService: AuthService,
-  ) { 
-    // this.authService.loggedIn
-    //   .subscribe(loggedIn => this.loggedIn = loggedIn);
-
-    }
+  ) { }
 
   doLogin(email, password) {
     this.authService.login(email, password)

@@ -1,22 +1,36 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { TestBed, async, inject } from '@angular/core/testing';
+import { HttpClientModule, HttpClient, HttpRequest, HttpParams } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BlogService } from './blog.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { AuthService } from '../authorization/auth.service';
 
 describe('BlogService', () => {
+
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        HttpClientTestingModule
+      ],
       providers: [
         BlogService,
-        HttpClient,
-        HttpHandler,
         AuthService
       ]
     });
   });
 
-  it('should be created', inject([BlogService], (service: BlogService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should send an expected getBlogs request',
+    async(
+      inject([BlogService, HttpTestingController], (service: BlogService, backend: HttpTestingController) => {
+        service.getBlogs().subscribe();
+
+        backend.expectOne((req: HttpRequest<any>) => {
+          console.log(req);          
+          return req.url === 'http://localhost:8001/blogs'          
+          && req.method === 'GET'
+          && req.headers.get('Content-Type') === 'application/json'
+        }, 'GET to http://localhost:8001/blogs for array of blogs');
+      })
+    )
+  );
 });

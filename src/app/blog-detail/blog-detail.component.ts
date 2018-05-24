@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
-  @Input() blog: Blog;
+  blog: Blog;
 
   constructor(
     private router: Router,

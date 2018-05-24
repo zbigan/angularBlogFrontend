@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-// import {ToastrService} from 'ngx-toastr';
+import {HttpClient, HttpHeaders, HttpHandler} from '@angular/common/http';
+import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { HttpBase } from '../../http-base';
 import { environment } from '../../../environments/environment';
@@ -12,10 +12,10 @@ export class AuthService extends HttpBase {
   loggedIn: BehaviorSubject<boolean>;
 
   constructor(
-    public http: HttpClient,
-    // private toastr: ToastrService
+    private handlerrr: HttpHandler,
+    private toastr: ToastrService
   ) {
-    super(http);
+    super(handlerrr);
     const jwtToken = this.getToken();
     this.loggedIn = new BehaviorSubject<boolean>(jwtToken ? true : false);
   }
@@ -25,21 +25,19 @@ export class AuthService extends HttpBase {
         email: email,
         password: password
       }, 
-      environment.baseUrl+'/login',
-      this.buildHeaders()
+      environment.baseUrl+'/login'
     );
-      
   }
 
   loginCallback(resp) {
     !resp  ? (
-      this.loggedIn.next(undefined)
-      // this.toastr.error('Wrong email or password.')
+      this.loggedIn.next(undefined),
+      this.toastr.error('Wrong email or password.')
       
     ) : (
         this.loggedIn.next(true),
-        this.saveToken(resp.token)
-        // this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
+        this.saveToken(resp.token),
+        this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
       )
   }
 
@@ -49,10 +47,6 @@ export class AuthService extends HttpBase {
     this.loggedIn.next(false);
     window.localStorage.removeItem('userName');
     window.localStorage.removeItem('userEmail');
-  }
-
-  getToken(): string {
-    return window.localStorage['jwtToken'];
   }
 
   isAuthenticated(): Promise<boolean> {
@@ -68,18 +62,5 @@ export class AuthService extends HttpBase {
   destroyToken() {
     window.localStorage.removeItem('jwtToken');
   }
-
-  buildHeaders(): HttpHeaders {
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    if (this.getToken()) {
-      headersConfig['Authorization'] = `Token ${this.getToken()}`;
-    }
-    return new HttpHeaders(headersConfig);
-}
-  
 
 }

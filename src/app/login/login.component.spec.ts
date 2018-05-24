@@ -11,9 +11,9 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let submitElement: DebugElement;
-  let emailElement: DebugElement;  
-  let passwordElement: DebugElement;
-  let formElement: DebugElement;
+  let emailElement: HTMLInputElement;  
+  let passwordElement: HTMLInputElement;
+  // let formElement: DebugElement;
   // let authService: AuthService;
 
   beforeEach(() => {
@@ -32,23 +32,26 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    // submitElement = fixture.debugElement.query(By.css('.btn-primary'));
-    // emailElement = fixture.debugElement.query(By.css('input[type=email]'));
+    submitElement = fixture.debugElement.query(By.css('.btn-primary'));
+    emailElement = fixture.nativeElement.querySelector('input[type=email]');
     // passwordElement = fixture.debugElement.query(By.css('input[type=password]'));
+    passwordElement = fixture.nativeElement.querySelector('input[type=password]');
     // authService = TestBed.get(AuthService);        
-    formElement = fixture.debugElement.query(By.css('#form'));
+    // formElement = fixture.debugElement.query(By.css('#form'));
 
   });
 
   it('when logged out, show login form', () => {
+    emailElement.value = 'new@gmail.com'
+    passwordElement.value = 'newnew';
+
+    // emailElement.dispatchEvent(newEvent('input[type=email]'));
+
+    // expect(passwordElement.nativeElement.textContent.trim()).toBe('');
+    // spyOn(component, 'checkIfLoggedIn').and.returnValue(true);    
     // fixture.detectChanges();    
-    // expect(formElement.nativeElement.textContent.trim()).toBe('');
-    // fixture.detectChanges();
-    // expect(formElement.nativeElement.textContent.trim()).toBeTruthy();
-    spyOn(component, 'checkIfLoggedIn').and.returnValue(true);    
-    fixture.detectChanges();    
-    // console.log(component.loggedIn);    
-    expect(formElement.nativeElement.textContent.trim()).toBe('');
+    // expect(passwordElement).toBeFalsy();
+    // console.log(passwordElement);
     
   });
 });
