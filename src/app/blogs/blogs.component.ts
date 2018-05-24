@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../blog';
 import { BlogService } from '../services/blog/blog.service';
-import { AuthService } from '../services/authorization/auth.service';
 
 
 @Component({
@@ -13,7 +12,6 @@ export class BlogsComponent implements OnInit {
   blogs: Blog[];
 
   constructor(
-    private authService: AuthService,
     private blogService: BlogService
   ) { }
 
@@ -27,7 +25,7 @@ export class BlogsComponent implements OnInit {
   }
   
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 
 }

@@ -19,12 +19,12 @@ export class LoginComponent {
     });
   } 
       
-  doLogout() {
-    this.authService.logout();
+  destroyToken() {
+    window.localStorage.removeItem('jwtToken');
   }
 
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 
 }

@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpHandler} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { HttpBase } from '../../http-base';
@@ -7,21 +6,14 @@ import { environment } from '../../../environments/environment';
 
 
 @Injectable()
-export class AuthService extends HttpBase {
-
-  loggedIn: BehaviorSubject<boolean>;
-
+export class AuthService {
   constructor(
-    private handlerrr: HttpHandler,
-    private toastr: ToastrService
-  ) {
-    super(handlerrr);
-    const jwtToken = this.getToken();
-    this.loggedIn = new BehaviorSubject<boolean>(jwtToken ? true : false);
-  }
+    private toastr: ToastrService,
+    private httpBase: HttpBase
+  ) { }
 
   login(email: string, password: string) {
-    return this.httpPost({
+    return this.httpBase.httpPost({
         email: email,
         password: password
       }, 
@@ -31,11 +23,9 @@ export class AuthService extends HttpBase {
 
   loginCallback(resp) {
     !resp  ? (
-      this.loggedIn.next(undefined),
       this.toastr.error('Wrong email or password.')
       
     ) : (
-        this.loggedIn.next(true),
         this.saveToken(resp.token),
         this.toastr.success((resp && resp.user && resp.user.name ? `Welcome ${resp.user.name}` : 'Logged in!'))
       )
@@ -44,9 +34,7 @@ export class AuthService extends HttpBase {
   
   logout() {
     this.destroyToken();
-    this.loggedIn.next(false);
-    window.localStorage.removeItem('userName');
-    window.localStorage.removeItem('userEmail');
+    // this.loggedIn.next(false);
   }
 
   isAuthenticated(): Promise<boolean> {

@@ -4,7 +4,6 @@ import { BlogService } from '../services/blog/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/authorization/auth.service';
 
 
 @Component({
@@ -20,7 +19,6 @@ export class BlogEditComponent implements OnInit {
     private blogService: BlogService,
     private location: Location,
     private router: Router,
-    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +46,6 @@ export class BlogEditComponent implements OnInit {
   }
 
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 }

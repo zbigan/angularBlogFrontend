@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../user';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 import { HttpBase } from '../../http-base';
-import { AuthService } from '../authorization/auth.service';
 import { environment } from '../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Injectable()
-export class UserService extends HttpBase {
+export class UserService {
 
   constructor(
-    public handlerrr: HttpHandler,
-    private authservice: AuthService
-  ) {super(handlerrr)}
+    private httpBase: HttpBase,
+    private router: Router,    
+    private toastr: ToastrService,    
+  ) { }
 
-
+  
+  registerCallback(resp){
+    !resp  ? (
+      this.toastr.error('Please provide correct data.')
+      
+    ) : (
+    this.router.navigate(['login'])
+     )
+  }
 
   saveNewUser(user: User) {
-    return this.httpPost(user, environment.baseUrl+'/users');
+    return this.httpBase.httpPost(user, environment.baseUrl+'/users');
   }
 
 }

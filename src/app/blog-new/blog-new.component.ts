@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Blog } from '../blog';
 import { BlogService } from '../services/blog/blog.service';
-import { AuthService } from '../services/authorization/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -18,12 +17,11 @@ export class BlogNewComponent {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private authService: AuthService,
     private location: Location
   ) { }
 
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 
   goToBlogs(): void {

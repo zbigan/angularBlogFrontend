@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 import { UserService } from '../services/user/user.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/authorization/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,13 +14,9 @@ import { AuthService } from '../services/authorization/auth.service';
 export class RegisterComponent {
 
   constructor(
-    private location: Location,
     private userService: UserService,
-    private router: Router,
-    private authService: AuthService
-
+    private router: Router
   ) { }
-
 
   goToLogin(): void {
     this.router.navigate(['login']);      
@@ -28,11 +24,13 @@ export class RegisterComponent {
 
   createUser(name: string, email: string, password: string): void {
     this.userService.saveNewUser({name, email, password} as User)
-       .subscribe(() => this.goToLogin());
+       .subscribe((resp) => {
+        this.userService.registerCallback(resp);
+      });
   }
 
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 
 }

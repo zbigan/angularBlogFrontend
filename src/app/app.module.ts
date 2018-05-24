@@ -20,6 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './services/user/user.service';
 import { RouterModule, Router } from '@angular/router';
+import { HttpBase } from './http-base';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { RouterModule, Router } from '@angular/router';
   providers: [
     BlogService,
     AuthService,
-    UserService
+    UserService,
+    HttpBase
   ],
   bootstrap: [AppComponent]
 })

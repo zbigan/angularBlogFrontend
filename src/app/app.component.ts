@@ -13,19 +13,11 @@ export class AppComponent  {
                 
   }
 
-  
-
-  // checkIfLoggedIn() {
-  //   this.authService.isAuthenticated().then((authenticated)=>{
-  //     this.needsLogin = !authenticated;
-  //   });
-  // }
-
   checkIfLoggedIn(): boolean {
-    return !!this.authService.getToken();
+    return !!window.localStorage['jwtToken'];
   }
 
   logOut(): void {
-    this.authService.logout()
+    window.localStorage.removeItem('jwtToken');    
   }
 }
