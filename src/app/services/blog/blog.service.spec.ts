@@ -27,7 +27,6 @@ describe('BlogService', () => {
         service.getBlogs().subscribe();
 
         backend.expectOne((req: HttpRequest<any>) => {
-          console.log(req);          
           return req.url === 'http://localhost:8001/blogs'          
           && req.method === 'GET'
           && req.headers.get('Content-Type') === 'application/json'
